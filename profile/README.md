@@ -27,12 +27,12 @@ Provides high-level APIs to interface with smartcards, initialize wallets, manag
 Secure smartcard for managing digital assets.<br/>
 Supports key derivation, authentication, transaction signing, and address management via Python, Rust, C++, and mobile SDKs (iOS & Android).
 
-📖 [Documentation](https://docs.cryptnox.com/hardware-wallet-v1-6/cryptnox-card-communication-libraries/) 
+📖 [Documentation](https://cryptnox.github.io/cryptnox-hardware-wallet/) 
 
 ## Links
 
 - Website: [https://www.cryptnox.com](https://www.cryptnox.com)
 - Shop now: [https://shop.cryptnox.com](https://shop.cryptnox.com)
-- Contact: [support@cryptnox.com](mailto:support@cryptnox.com)
+- Support: [support@cryptnox.com](mailto:support@cryptnox.com)
 - LinkedIn: [https://www.linkedin.com/company/cryptnox](https://www.linkedin.com/company/cryptnox)
 - X: [https://x.com/CryptnoxTech/](https://x.com/CryptnoxTech/)
