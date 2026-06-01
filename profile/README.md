@@ -21,6 +21,21 @@ Provides high-level APIs to interface with smartcards, initialize wallets, manag
 📖 [Documentation](https://cryptnox.github.io/cryptnox-sdk-py/)<br/>
 🔗 [Main repository](https://github.com/cryptnox/cryptnox-sdk-py/)
 
+## cryptnox-sdk-arduino
+
+Arduino library for integrating smartcard wallets into embedded projects.<br/>
+Provides high-level APIs to establish a secure channel, manage PINs, and sign transactions on Arduino-compatible boards.
+
+📖 [Documentation](https://cryptnox.github.io/cryptnox-sdk-arduino/)<br/>
+🔗 [Main repository](https://github.com/cryptnox/cryptnox-sdk-arduino/)
+
+## cryptnox-sdk-esp32
+
+ESP-IDF component bundle for integrating smartcard wallets into ESP32 firmware.<br/>
+Provides high-level APIs to establish a secure channel, manage PINs, and sign transactions on the ESP32 family.
+
+📖 [Documentation](https://cryptnox.github.io/cryptnox-sdk-esp32/)<br/>
+🔗 [Main repository](https://github.com/cryptnox/cryptnox-sdk-esp32/)
 
 ## Cryptnox Hardware Wallet
 
