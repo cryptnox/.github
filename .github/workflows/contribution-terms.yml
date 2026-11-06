@@ -1,0 +1,53 @@
+name: Contribution terms
+
+# Reusable workflow. A repository calls it from a small workflow of its own
+# that triggers on pull_request. It fails when a pull request from outside
+# Cryptnox does not have the contribution terms box ticked.
+#
+# Who counts as inside Cryptnox: the pull request comes from a branch in the
+# repository itself (only people with write access can push one), or GitHub
+# reports the author as owner, member or collaborator. GitHub reports
+# membership only when it is public, which is why the branch test comes first.
+#
+# AGREEMENT_VERSION must match the version named in the acceptance line of
+# the pull request template and the tag that line links to. Change it in the
+# same pull request that changes the agreement.
+
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  terms:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the contribution terms box
+        env:
+          AGREEMENT_VERSION: "1.1"
+          PR_BODY: ${{ github.event.pull_request.body }}
+          ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          AUTHOR_TYPE: ${{ github.event.pull_request.user.type }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$AUTHOR_TYPE" = "Bot" ]; then
+            echo "Bot pull request, contribution terms not required."
+            exit 0
+          fi
+          if [ "$HEAD_REPO" = "$GITHUB_REPOSITORY" ]; then
+            echo "Branch lives in the repository itself, so the author has write access and contributes under an agreement with Cryptnox. Nothing to check."
+            exit 0
+          fi
+          case "$ASSOCIATION" in
+            OWNER|MEMBER|COLLABORATOR)
+              echo "Author contributes under an agreement with Cryptnox. Nothing to check."
+              exit 0
+              ;;
+          esac
+          version_re=$(printf '%s' "$AGREEMENT_VERSION" | sed 's/\./\\./g')
+          if printf '%s\n' "$PR_BODY" | tr -d '\r' | grep -Eq "^- \[[xX]\] I have read and I accept the \[Cryptnox Contributor Agreement, version ${version_re}\]"; then
+            echo "Contribution terms accepted."
+          else
+            echo "::error::Tick the contribution terms box in the pull request description. See https://github.com/cryptnox/.github/blob/contributor-agreement-v${AGREEMENT_VERSION}/CONTRIBUTOR_AGREEMENT.md"
+            exit 1
+          fi
